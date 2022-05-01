@@ -3,7 +3,7 @@ const RESPONSE = [
     _type: "product_search_hit",
     hit_type: "variation_group",
     link: "https://development-shop-lolaliza.demandware.net/s/lolaliza/dw/shop/v19_10/products/05701906_1019?select=%28count%2Chits.%28**%29%2Crefinements.%28attribute_id%2Clabel%2Cvalues%5B0%3A1000%5D%29%2Csorting_options%2Ctotal%29&select=%28**%29&refine_2=htype%3Dslicing_group%7Cproduct%7Cvariation_group%7Cmaster&refine_3=c_showInHsApp%3Dtrue&refine_4=orderable_only%3Dfalse&count=20&currency=EUR&refine_1=cgid%3D1&locale=fr-BE",
-    orderable: true,
+    orderable: false,
     product_id: "05701906_1019",
     product_name: "Blouse en matière tétra avec broderie",
     price: 20,

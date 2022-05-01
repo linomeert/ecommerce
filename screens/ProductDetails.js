@@ -49,7 +49,15 @@ export function ProductDetails({ route }) {
         <Image style={styles.image} source={{ uri: images[0] }} />
         <View style={styles.infoContainer}>
           <Text style={styles.name}>{product.product_name}</Text>
-          <Button color="#ff8170" onPress={onAddToCart} title="Add to cart" />
+          <Text style={product.orderable ? styles.instock : styles.outstock}>
+            {product.orderable ? "In stock 😛" : "Out of stock 🥺"}
+          </Text>
+          <Button
+            disabled={!product.orderable}
+            color="#ff8170"
+            onPress={onAddToCart}
+            title="Add to cart"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -69,6 +77,16 @@ const styles = StyleSheet.create({
     elevation: 1,
     marginVertical: 20,
   },
+  instock: {
+    color: "green",
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  outstock: {
+    color: "red",
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
   image: {
     height: 500,
     width: "100%",
@@ -79,7 +97,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 20,
   },
   price: {
     fontSize: 16,

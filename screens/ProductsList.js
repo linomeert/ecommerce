@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { Product } from "../components/Product.js";
 import { getProducts } from "../services/ProductsService.js";
+import { getTheProducts } from "../services/ProductsService2.js";
 export function ProductsList({ navigation }) {
   function renderProduct({ item: product }) {
     return (
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   },
   productsListContainer: {
     backgroundColor: "#eeeeee",
-    paddingVertical: 8,
-    marginHorizontal: 8,
+    paddingVertical: 20,
+    marginHorizontal: 20,
   },
 });

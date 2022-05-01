@@ -1,14 +1,23 @@
 import React from "react";
 import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
-export function Product({ product_name, product_id, price, onPress }) {
+export function Product({
+  product_name,
+  product_id,
+  orderable,
+  price,
+  onPress,
+}) {
   let image = `https://www.lolaliza.com/on/demandware.static/-/Sites-lolaliza-catalog/default/dwbf4891e3/images/${product_id}_01.jpg`;
 
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
       <Image style={styles.thumb} source={{ uri: image }} />
-
       <View style={styles.infoContainer}>
         <Text style={styles.name}>{product_name}</Text>
+        <Text style={orderable ? styles.instock : styles.outstock}>
+          {orderable ? "In stock" : "Out of stock"}
+        </Text>
+
         <Text style={styles.price}>{price} EUR</Text>
       </View>
     </TouchableOpacity>
@@ -17,7 +26,7 @@ export function Product({ product_name, product_id, price, onPress }) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "white",
-    borderRadius: 16,
+    borderRadius: 5,
     shadowOpacity: 0.2,
     shadowRadius: 4,
     shadowColor: "black",
@@ -29,7 +38,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   thumb: {
-    height: 260,
+    height: 400,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
     width: "100%",
@@ -38,8 +47,18 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   name: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: "bold",
+  },
+  instock: {
+    color: "green",
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  outstock: {
+    color: "red",
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   price: {
     fontSize: 16,
