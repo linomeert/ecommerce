@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import styled from "styled-components/native";
 
@@ -21,13 +21,25 @@ export default function Alert({
 
   if (!isShowAlert) return null;
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsShowAlert(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <AlertStyles>
-      <AlertCloseBtnStyles onClick={handleClose}>&times;</AlertCloseBtnStyles>
+    <AlertStyles classa>
+      <AlertCloseBtnStyles
+        onClick={handleClose}
+        onTransitionEnd={() => setIsShowAlert(false)}
+      >
+        &times;
+      </AlertCloseBtnStyles>
       {children ? (
         renderElAlert()
       ) : (
-        <AlertTextStyles onClick={handleClose}>{message}</AlertTextStyles>
+        <AlertTextStyles onPress={handleClose}>{message}</AlertTextStyles>
       )}
     </AlertStyles>
   );
@@ -44,9 +56,6 @@ const AlertStyles = styled.View`
   align-items: center;
   flex-direction: row;
   padding: 20px;
-  &.hide {
-    display: none;
-  }
 `;
 
 const AlertTextStyles = styled.Text`

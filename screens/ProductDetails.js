@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+
 import {
   Text,
   Image,
@@ -9,18 +10,22 @@ import {
   StyleSheet,
 } from "react-native";
 import { getProduct } from "../services/ProductsService.js";
+import { getNextProduct } from "../services/ProductsService.js";
+
 import { CartContext } from "../CartContext";
 import Alert from "../components/Alert";
 
 export function ProductDetails({ route }) {
   const { productId } = route.params;
   const [product, setProduct] = useState({});
+  const [nextProduct, setNextProduct] = useState({});
   const [isShowAlert, setIsShowAlert] = useState(false);
 
   const { addItemToCart } = useContext(CartContext);
 
   useEffect(() => {
     setProduct(getProduct(productId));
+    setNextProduct(getNextProduct(productId));
   });
 
   function onAddToCart() {
@@ -44,7 +49,7 @@ export function ProductDetails({ route }) {
         <Image style={styles.image} source={{ uri: images[0] }} />
         <View style={styles.infoContainer}>
           <Text style={styles.name}>{product.product_name}</Text>
-          <Button onPress={onAddToCart} title="Add to cart" />
+          <Button color="#ff8170" onPress={onAddToCart} title="Add to cart" />
         </View>
       </ScrollView>
     </SafeAreaView>

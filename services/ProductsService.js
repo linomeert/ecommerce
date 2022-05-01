@@ -136,6 +136,10 @@ export function getProducts() {
   return RESPONSE;
 }
 
+export function getNextProduct(id) {
+  return RESPONSE[RESPONSE.indexOf(getProduct(id))];
+}
+
 export function getProduct(id) {
   return RESPONSE.find((product) => product.product_id == id);
 }
