@@ -10,11 +10,12 @@ import {
 } from "react-native";
 import { getProduct } from "../services/ProductsService.js";
 import { CartContext } from "../CartContext";
-import { Message } from "../components/Message";
+import Alert from "../components/Alert";
 
 export function ProductDetails({ route }) {
   const { productId } = route.params;
   const [product, setProduct] = useState({});
+  const [isShowAlert, setIsShowAlert] = useState(false);
 
   const { addItemToCart } = useContext(CartContext);
 
@@ -24,6 +25,7 @@ export function ProductDetails({ route }) {
 
   function onAddToCart() {
     addItemToCart(product.product_id);
+    setIsShowAlert(true);
   }
 
   let images = Array.from(Array(4).keys()).map((id) => {
@@ -34,10 +36,12 @@ export function ProductDetails({ route }) {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Message message="Hello"></Message>
+        <Alert
+          message="Product added to basket!"
+          isShowAlert={isShowAlert}
+          setIsShowAlert={setIsShowAlert}
+        />
         <Image style={styles.image} source={{ uri: images[0] }} />
-        <Image style={styles.image} source={{ uri: images[1] }} />
-        <Image style={styles.image} source={{ uri: images[2] }} />
         <View style={styles.infoContainer}>
           <Text style={styles.name}>{product.product_name}</Text>
           <Button onPress={onAddToCart} title="Add to cart" />
